@@ -46,3 +46,11 @@ Added a deadline warning for the last 5 seconds of the round.
 Added real time progress bar for each player.
 
 Split the page into components.
+
+## Step 4
+
+I will add a table from supabase to store user history.
+
+Because of lack of time, there will be no authentication and a player will be identified based on the name 🙁
+
+The table is displayed at the bottom of the page.

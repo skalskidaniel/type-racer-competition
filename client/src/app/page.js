@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -24,12 +25,19 @@ export default function TypeRacer() {
   const [startTime, setStartTime] = useState(null);
   const [wpm, setWpm] = useState(0);
   const [showDeadlineWarning, setShowDeadlineWarning] = useState(false);
+  const [leaderboard, setLeaderboard] = useState([]);
 
   const inputRef = useRef(null);
 
   useEffect(() => {
     const newSocket = io(SOCKET_URL);
     setSocket(newSocket);
+
+    newSocket.emit("get-leaderboard");
+
+    newSocket.on("leaderboard-update", (data) => {
+      setLeaderboard(data);
+    });
 
     newSocket.on("room-update", (data) => {
       setRoom(data);
@@ -135,6 +143,7 @@ export default function TypeRacer() {
         setUsername={setUsername}
         roomId={roomId}
         setRoomId={setRoomId}
+        leaderboard={leaderboard}
       />
     );
   }

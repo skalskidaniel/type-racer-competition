@@ -1,6 +1,7 @@
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { sentences } from "./sentences.js";
+import { supabase } from "./supabase/client.js";
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -14,6 +15,20 @@ const rooms = new Map();
 
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
+
+  socket.on("get-leaderboard", async () => {
+    const { data, error } = await supabase
+      .from("player_stats")
+      .select("user_name, played_games, words_per_min_avg")
+      .order("words_per_min_avg", { ascending: false })
+      .limit(10);
+
+    if (!error) {
+      socket.emit("leaderboard-update", data);
+    } else {
+      console.error("Error fetching leaderboard:", error);
+    }
+  });
 
   socket.on("join-room", ({ roomId, username }) => {
     if (!rooms.has(roomId)) {
@@ -131,6 +146,24 @@ io.on("connection", (socket) => {
       }, 1000);
     } else {
       room.status = "finished";
+
+      const resultsToSave = Object.values(room.players).map((player) => ({
+        user_name: player.username,
+        words_per_min: Math.round(player.wpm) || 0,
+      }));
+
+      if (resultsToSave.length > 0) {
+        supabase
+          .from("game_results")
+          .insert(resultsToSave)
+          .then(({ error }) => {
+            if (error) {
+              console.error("Error saving game results:", error);
+            } else {
+              console.log("Game results saved for room:", roomId);
+            }
+          });
+      }
     }
 
     io.to(roomId).emit("room-update", room);
