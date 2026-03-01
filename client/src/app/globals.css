@@ -31,7 +31,6 @@
 		@apply rounded-none transition-all duration-300;
 	}
 
-	/* Hairline divider */
 	.hairline-b {
 		border-bottom: 1px solid var(--color-border-hairline);
 	}
@@ -59,6 +58,6 @@
 	}
 
 	.mono-label {
-		@apply font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-400;
+		@apply font-mono text-[14px] uppercase tracking-[0.2em] text-zinc-400;
 	}
 }

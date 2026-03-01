@@ -36,3 +36,13 @@ I will create a local hosted app.
 ## Step 2
 
 Used LLM to generate CSS styling.
+
+## Step 3
+
+Minor UI improvements.
+
+Added a deadline warning for the last 5 seconds of the round.
+
+Added real time progress bar for each player.
+
+Split the page into components.
