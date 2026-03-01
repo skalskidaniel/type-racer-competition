@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project overview
 
-## Getting Started
+## Step 1
 
-First, run the development server:
+I have identified the best would be to use socket.io for the real-time competition.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+I will create a local hosted app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Use cases
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**Creating the tournament**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. First user visits the page and is presented with a form to create a new tournament; he is treated as admin as he is the first user
+2. The user chooses the tournament rules
 
-## Learn More
+   a. Time per round (default 60 seconds)
 
-To learn more about Next.js, take a look at the following resources:
+   b. Break time between rounds (default 15 seconds)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   c. Number of rounds (default 5)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Joining the tournament**
 
-## Deploy on Vercel
+1. User visits the site and enters their name
+2. User can see the players who already joined the competition
+3. User waits for admin's signal to start the game
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Tournament rules**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Each round every user gets the same one sentence
+2. Round text is generated to be up to 100 characters
+3. Tracked metrics include words per minute (words with errors doesn't count) and accuracy
+4. The round finishes after each competitor finished typing or after a deadline set by the admin
+5. There is a counter signaling time left in the round
