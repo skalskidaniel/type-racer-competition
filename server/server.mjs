@@ -16,8 +16,6 @@ io.on("connection", (socket) => {
 	console.log("A user connected:", socket.id);
 
 	socket.on("join-room", ({ roomId, username }) => {
-		socket.join(roomId);
-
 		if (!rooms.has(roomId)) {
 			rooms.set(roomId, {
 				adminId: socket.id,
@@ -35,6 +33,14 @@ io.on("connection", (socket) => {
 		}
 
 		const room = rooms.get(roomId);
+
+		// Prevent joining if game already started
+		if (room.status !== "waiting") {
+			socket.emit("join-error", "This tournament has already started and cannot be joined.");
+			return;
+		}
+
+		socket.join(roomId);
 		room.players[socket.id] = {
 			id: socket.id,
 			username,
@@ -51,9 +57,10 @@ io.on("connection", (socket) => {
 	socket.on("start-game", ({ roomId, config }) => {
 		const room = rooms.get(roomId);
 		if (room && room.adminId === socket.id) {
-			room.config = config;
+			room.config = { ...room.config, ...config };
 			room.status = "starting";
-			room.timer = 3;
+			room.timer = 15;
+			room.currentRound = 1;
 
 			const countdownInterval = setInterval(() => {
 				room.timer--;

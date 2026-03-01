@@ -6,7 +6,7 @@ I have identified the best would be to use socket.io for the real-time competiti
 
 I will create a local hosted app.
 
-### Use cases
+### Usage scenarios
 
 **Creating the tournament**
 
@@ -32,3 +32,7 @@ I will create a local hosted app.
 3. Tracked metrics include words per minute (words with errors doesn't count) and accuracy
 4. The round finishes after each competitor finished typing or after a deadline set by the admin
 5. There is a counter signaling time left in the round
+
+## Step 2
+
+Used LLM to generate CSS styling.

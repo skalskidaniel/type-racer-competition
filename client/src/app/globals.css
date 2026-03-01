@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+	--font-serif: "Playfair Display", "Times New Roman", serif;
+	--font-sans: "Inter", "system-ui", sans-serif;
+	--font-mono: "Space Mono", "Courier New", monospace;
+
+	--color-bg-primary: #ffffff;
+	--color-bg-secondary: #f4f4f5;
+	--color-text-primary: #000000;
+	--color-text-secondary: #71717a;
+	--color-accent: #000000;
+	--color-border-hairline: rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+	body {
+		@apply bg-[family-name:--color-bg-primary] text-[family-name:--color-text-primary] antialiased;
+		font-family: var(--font-sans);
+	}
+
+	h1,
+	h2,
+	h3 {
+		font-family: var(--font-serif);
+		letter-spacing: -0.02em;
+	}
+
+	input,
+	button {
+		@apply rounded-none transition-all duration-300;
+	}
+
+	/* Hairline divider */
+	.hairline-b {
+		border-bottom: 1px solid var(--color-border-hairline);
+	}
+
+	.hairline-t {
+		border-top: 1px solid var(--color-border-hairline);
+	}
+
+	.hairline-l {
+		border-left: 1px solid var(--color-border-hairline);
+	}
+
+	.hairline-r {
+		border-right: 1px solid var(--color-border-hairline);
+	}
+}
+
+@layer utilities {
+	.text-display-xl {
+		@apply text-5xl md:text-7xl font-light leading-tight;
+	}
+
+	.text-display-lg {
+		@apply text-3xl md:text-5xl font-light leading-snug;
+	}
+
+	.mono-label {
+		@apply font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-400;
+	}
+}
