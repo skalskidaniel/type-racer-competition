@@ -20,39 +20,13 @@ This is a full-stack Type Racer competition app with a Next.js client and a Node
    npm install
    ```
 
-## Running the App
-You can run both the client and server together, or individually.
-
-### Run Both (Recommended)
+### Run app
 ```bash
 npm run dev
 ```
+
 - Starts the Next.js client on http://localhost:3000
 - Starts the server (Socket.IO + Supabase) on http://localhost:4000 (or as configured)
-
-### Run Client Only
-```bash
-npm run client
-```
-
-### Run Server Only
-```bash
-npm run server
-```
-
-## Build for Production
-To build the client for production:
-```bash
-npm run build
-```
-To start the client in production mode:
-```bash
-npm run start -w client
-```
-To start the server in production mode:
-```bash
-npm run start -w server
-```
 
 ## Environment Variables
 - Configure Supabase and other secrets in `server/.env` as needed.
