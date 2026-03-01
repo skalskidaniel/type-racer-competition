@@ -1,56 +1,62 @@
-# Project overview
+# Type Racer Competition
 
-## Step 1
+Step by step comments can be found [here](/overview.md)
 
-I have identified the best would be to use socket.io for the real-time competition.
+## Overview
+This is a full-stack Type Racer competition app with a Next.js client and a Node.js server using Socket.IO and Supabase.
 
-I will create a local hosted app.
+## Prerequisites
+- Node.js (v18 or newer recommended)
+- npm (v9 or newer recommended)
 
-### Usage scenarios
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   cd type-racer-competition
+   ```
+2. Install dependencies for both client and server:
+   ```bash
+   npm install
+   ```
 
-**Creating the tournament**
+## Running the App
+You can run both the client and server together, or individually.
 
-1. First user visits the page and is presented with a form to create a new tournament; he is treated as admin as he is the first user
-2. The user chooses the tournament rules
+### Run Both (Recommended)
+```bash
+npm run dev
+```
+- Starts the Next.js client on http://localhost:3000
+- Starts the server (Socket.IO + Supabase) on http://localhost:4000 (or as configured)
 
-   a. Time per round (default 60 seconds)
+### Run Client Only
+```bash
+npm run client
+```
 
-   b. Break time between rounds (default 15 seconds)
+### Run Server Only
+```bash
+npm run server
+```
 
-   c. Number of rounds (default 5)
+## Build for Production
+To build the client for production:
+```bash
+npm run build
+```
+To start the client in production mode:
+```bash
+npm run start -w client
+```
+To start the server in production mode:
+```bash
+npm run start -w server
+```
 
-**Joining the tournament**
+## Environment Variables
+- Configure Supabase and other secrets in `server/.env` as needed.
 
-1. User visits the site and enters their name
-2. User can see the players who already joined the competition
-3. User waits for admin's signal to start the game
-
-**Tournament rules**
-
-1. Each round every user gets the same one sentence
-2. Round text is generated to be up to 100 characters
-3. Tracked metrics include words per minute (words with errors doesn't count) and accuracy
-4. The round finishes after each competitor finished typing or after a deadline set by the admin
-5. There is a counter signaling time left in the round
-
-## Step 2
-
-Used LLM to generate CSS styling.
-
-## Step 3
-
-Minor UI improvements.
-
-Added a deadline warning for the last 5 seconds of the round.
-
-Added real time progress bar for each player.
-
-Split the page into components.
-
-## Step 4
-
-I will add a table from supabase to store user history.
-
-Because of lack of time, there will be no authentication and a player will be identified based on the name 🙁
-
-The table is displayed at the bottom of the page.
+## Project Structure
+- `client/` — Next.js frontend
+- `server/` — Node.js backend (Socket.IO, Supabase)
