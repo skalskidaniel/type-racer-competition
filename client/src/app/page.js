@@ -20,6 +20,7 @@ export default function TypeRacer() {
   const [username, setUsername] = useState("");
   const [roomId, setRoomId] = useState("");
   const [joined, setJoined] = useState(false);
+  const [connecting, setConnecting] = useState(true);
   const [joinError, setJoinError] = useState("");
   const [typedText, setTypedText] = useState("");
   const [startTime, setStartTime] = useState(null);
@@ -33,7 +34,10 @@ export default function TypeRacer() {
     const newSocket = io(SOCKET_URL);
     setSocket(newSocket);
 
-    newSocket.emit("get-leaderboard");
+    newSocket.on("connect", () => {
+      setConnecting(false);
+      newSocket.emit("get-leaderboard");
+    });
 
     newSocket.on("leaderboard-update", (data) => {
       setLeaderboard(data);
@@ -133,6 +137,18 @@ export default function TypeRacer() {
       return;
     }
   };
+
+  if (connecting) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white text-black">
+        <div className="text-center space-y-4">
+          <div className="w-12 h-12 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="text-xl font-medium animate-pulse">Connecting to server...</p>
+          <p className="text-gray-500 text-sm">This may take up to a minute on the free render tier.</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!joined) {
     return (
