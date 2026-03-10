@@ -6,7 +6,7 @@ import { supabase } from "./supabase/client.js";
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
@@ -200,7 +200,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 httpServer.listen(PORT, () => {
-  console.log(`Socket.io server running on http://localhost:${PORT}`);
+  console.log(`Socket.io server running on port ${PORT}`);
 });

@@ -1,14 +1,18 @@
 # Type Racer Competition
 
-Step by step comments can be found [here](/docs/overview.md)
+## Live Demo
+
+[Website is live here](https://type-racer-competition.vercel.app/)
+
+![](docs/type-racer-1.jpg)
+
+![](docs/type-racer-2.jpg)
+
 
 ## Overview
 This is a full-stack Type Racer competition app with a Next.js client and a Node.js server using Socket.IO and Supabase.
 
-## Interface
-
-![](docs/type-racer-1.jpg)
-![](docs/type-racer-2.jpg)
+Step by step comments can be found [here](/docs/overview.md)
 
 ## Prerequisites
 - Node.js (v18 or newer recommended)

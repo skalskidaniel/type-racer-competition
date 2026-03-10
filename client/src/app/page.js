@@ -12,7 +12,7 @@ import RaceTrack from "../components/RaceTrack";
 import TypingArea from "../components/TypingArea";
 import DeadlineWarning from "../components/DeadlineWarning";
 
-const SOCKET_URL = "http://localhost:4000";
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "http://localhost:4000";
 
 export default function TypeRacer() {
   const [socket, setSocket] = useState(null);
