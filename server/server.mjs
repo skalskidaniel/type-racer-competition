@@ -1,12 +1,17 @@
 import { createServer } from "http";
 import { Server } from "socket.io";
+import dotenv from "dotenv";
 import { sentences } from "./sentences.js";
 import { supabase } from "./supabase/client.js";
+
+dotenv.config();
+
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: [CLIENT_URL, "https://type-racer-competition.vercel.app"],
     methods: ["GET", "POST"],
   },
 });

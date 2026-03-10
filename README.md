@@ -1,46 +1,49 @@
-# Type Racer Competition
+# TypeRacer Competition
 
-## Live Demo
+## ⚡ Live Competition: Online Now
 
-[Website is live here](https://type-racer-competition.vercel.app/)
+Test your typing speed against players in real-time. This full-stack application provides a seamless, competitive experience with live progress tracking and historical leaderboards.
 
-![](docs/type-racer-1.jpg)
+### 🔗 Join the race: [type-racer-competition.vercel.app](https://type-racer-competition.vercel.app/)
 
-![](docs/type-racer-2.jpg)
+> **Note:** The platform supports real-time multiplayer races, custom tournament rules, and persistent score tracking via Supabase.
 
+---
 
-## Overview
-This is a full-stack Type Racer competition app with a Next.js client and a Node.js server using Socket.IO and Supabase.
+A real-time multiplayer typing competition platform. Built with Next.js, Node.js, and Socket.IO for low-latency interaction and Supabase for persistent data storage.
 
-Step by step comments can be found [here](/docs/overview.md)
+![TypeRacer UI](docs/type-racer-1.jpg)
 
-## Prerequisites
-- Node.js (v18 or newer recommended)
-- npm (v9 or newer recommended)
+## 🌟 Features
 
-## Installation
-1. Clone the repository:
+- **Real-time Multiplayer**: Compete with others simultaneously using Socket.IO
+- **Live Progress Tracking**: See every competitor's progress in real-time with dynamic progress bars
+- **Custom Tournaments**: Admins can configure round time, break duration, and total number of rounds
+- **Historical Leaderboards**: Track your performance over time with Supabase-backed history
+- **Responsive UI**: Modern, clean interface designed for maximum focus during races
+- **Smart Metrics**: Track Words Per Minute (WPM) and accuracy with precision
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js (React), Tailwind CSS
+- **Backend**: Node.js, Socket.IO
+- **Database**: Supabase (PostgreSQL)
+- **Real-time**: WebSockets via Socket.IO
+- **Deployment**: Vercel (Client), Node.js (Server)
+
+## 🚀 Getting Started
+
+1. **Clone & Install**:
    ```bash
    git clone <repo-url>
-   cd type-racer-competition
-   ```
-2. Install dependencies for both client and server:
-   ```bash
    npm install
    ```
-3. Create supabase project, and run [this](server/supabase/schema.sql) to create all necessary tables.
+2. **Database Setup**: Create a Supabase project and run the [schema.sql](server/supabase/schema.sql)
+3. **Environment**: Configure your Supabase credentials in `server/.env`
+4. **Run**:
+   ```bash
+   npm run dev
+   ```
 
-### Run app
-```bash
-npm run dev
-```
-
-- Starts the Next.js client on http://localhost:3000
-- Starts the server (Socket.IO + Supabase) on http://localhost:4000 (or as configured)
-
-## Environment Variables
-- Configure Supabase and other secrets in `server/.env` as needed.
-
-## Project Structure
-- `client/` — Next.js frontend
-- `server/` — Node.js backend (Socket.IO, Supabase)
+---
+Detailed project breakdown can be found in the [Project Overview](docs/overview.md).
