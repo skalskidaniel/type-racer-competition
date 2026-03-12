@@ -11,7 +11,7 @@ export default function ResultsScreen({ room, socket }) {
           </div>
           <div className="space-y-6">
             {Object.values(room.players)
-              .sort((a, b) => b.wpm - a.wpm)
+              .sort((a, b) => b.avgWpm - a.avgWpm)
               .map((player, index) => (
                 <div
                   key={player.id}
@@ -28,7 +28,7 @@ export default function ResultsScreen({ room, socket }) {
                     </span>
                   </div>
                   <span className="font-mono text-zinc-500">
-                    {player.wpm} WPM
+                    {player.avgWpm} WPM avg
                   </span>
                 </div>
               ))}

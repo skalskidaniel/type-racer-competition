@@ -49,6 +49,10 @@ export default function TypingArea({
           ref={inputRef}
           type="text"
           autoFocus
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
           value={typedText}
           onChange={handleTyping}
           className="w-full bg-transparent py-4 text-2xl font-light focus:outline-none placeholder:text-zinc-200 transition-all font-sans text-black"

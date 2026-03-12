@@ -58,6 +58,8 @@ export default function TypeRacer() {
   useEffect(() => {
     if (room?.status === "break" || room?.status === "finished") {
       setTypedText("");
+      setStartTime(null);
+      setWpm(0);
       setShowDeadlineWarning(false);
     }
   }, [room?.status]);

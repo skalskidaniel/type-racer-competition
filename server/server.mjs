@@ -68,6 +68,8 @@ io.on("connection", (socket) => {
       username,
       progress: 0,
       wpm: 0,
+      avgWpm: 0,
+      wpmHistory: [],
       accuracy: 100,
       isFinished: false,
       isAdmin: room.adminId === socket.id,
@@ -135,6 +137,12 @@ io.on("connection", (socket) => {
     const room = rooms.get(roomId);
     if (!room) return;
 
+    Object.values(room.players).forEach((p) => {
+      p.wpmHistory.push(p.wpm || 0);
+      const sum = p.wpmHistory.reduce((a, b) => a + b, 0);
+      p.avgWpm = Math.round(sum / p.wpmHistory.length);
+    });
+
     if (room.currentRound < room.config.totalRounds) {
       room.status = "break";
       room.timer = room.config.breakTime;
@@ -154,7 +162,7 @@ io.on("connection", (socket) => {
 
       const resultsToSave = Object.values(room.players).map((player) => ({
         user_name: player.username,
-        words_per_min: Math.round(player.wpm) || 0,
+        words_per_min: player.avgWpm || 0,
       }));
 
       if (resultsToSave.length > 0) {
