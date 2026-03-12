@@ -187,7 +187,7 @@ export default function TypeRacer() {
   return (
     <div className="min-h-screen bg-white text-black p-12">
       <div className="max-w-6xl mx-auto space-y-16">
-        <GameHeader roomId={roomId} room={room} wpm={wpm} />
+        <GameHeader roomId={roomId} room={room} wpm={wpm} socket={socket} />
 
         {room?.status === "break" ? (
           <BreakScreen room={room} />

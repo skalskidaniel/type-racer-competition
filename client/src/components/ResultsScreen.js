@@ -28,7 +28,7 @@ export default function ResultsScreen({ room, socket }) {
                     </span>
                   </div>
                   <span className="font-mono text-zinc-500">
-                    {player.avgWpm} WPM avg
+                    {player.avgWpm || 0} WPM
                   </span>
                 </div>
               ))}

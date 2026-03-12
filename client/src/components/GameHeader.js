@@ -1,4 +1,9 @@
-export default function GameHeader({ roomId, room, wpm }) {
+export default function GameHeader({ roomId, room, wpm, socket }) {
+  const isRacing = room?.status === "racing";
+  const player = room?.players?.[socket?.id];
+  const displayWpm = isRacing ? wpm : (player?.avgWpm || 0);
+  const label = isRacing ? "Current Velocity" : "Average Velocity";
+
   return (
     <header className="flex justify-between items-end border-b border-black/10 pb-8">
       <div className="space-y-4">
@@ -29,8 +34,8 @@ export default function GameHeader({ roomId, room, wpm }) {
         </div>
       </div>
       <div className="text-right space-y-1">
-        <div className="mono-label text-zinc-400">Current Velocity</div>
-        <div className="text-7xl font-serif italic leading-none">{wpm}</div>
+        <div className="mono-label text-zinc-400">{label}</div>
+        <div className="text-7xl font-serif italic leading-none">{displayWpm}</div>
         <div className="mono-label">Words / Minute</div>
       </div>
     </header>
