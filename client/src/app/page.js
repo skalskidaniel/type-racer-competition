@@ -25,7 +25,6 @@ export default function TypeRacer() {
   const [typedText, setTypedText] = useState("");
   const [startTime, setStartTime] = useState(null);
   const [wpm, setWpm] = useState(0);
-  const [showDeadlineWarning, setShowDeadlineWarning] = useState(false);
   const [leaderboard, setLeaderboard] = useState([]);
 
   const inputRef = useRef(null);
@@ -46,6 +45,12 @@ export default function TypeRacer() {
     newSocket.on("room-update", (data) => {
       setRoom(data);
       setJoinError("");
+      
+      if (data.status === "break" || data.status === "finished") {
+        setTypedText("");
+        setStartTime(null);
+        setWpm(0);
+      }
     });
 
     newSocket.on("join-error", (errorMsg) => {
@@ -55,29 +60,7 @@ export default function TypeRacer() {
 
     return () => newSocket.close();
   }, []);
-  useEffect(() => {
-    if (room?.status === "break" || room?.status === "finished") {
-      setTypedText("");
-      setStartTime(null);
-      setWpm(0);
-      setShowDeadlineWarning(false);
-    }
-  }, [room?.status]);
 
-  useEffect(() => {
-    if (
-      room?.status === "racing" &&
-      room?.timer === 5 &&
-      !room?.players[socket?.id]?.isFinished
-    ) {
-      setShowDeadlineWarning(true);
-    } else if (
-      room?.status !== "racing" ||
-      room?.players[socket?.id]?.isFinished
-    ) {
-      setShowDeadlineWarning(false);
-    }
-  }, [room?.timer, room?.status, room?.players, socket?.id]);
 
   const handleJoin = (e) => {
     e.preventDefault();
@@ -166,8 +149,13 @@ export default function TypeRacer() {
     );
   }
 
-  const isAdmin = room?.players[socket.id]?.isAdmin;
+  const isAdmin = room?.players[socket?.id]?.isAdmin;
   const status = room?.status || "waiting";
+
+  const showDeadlineWarning = 
+    status === "racing" && 
+    room?.timer <= 5 && 
+    !room?.players[socket?.id]?.isFinished;
 
   if (status === "waiting" || status === "starting") {
     return (
